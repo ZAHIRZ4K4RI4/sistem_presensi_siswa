@@ -20,67 +20,83 @@
                     <span>Dashboard</span></a>
             </li>
 
+
+
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <!-- <hr class="sidebar-divider"> -->
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <!-- <div class="sidebar-heading">
                 Data Master
-            </div>
+            </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Data Absensi</span>
-                </a>
-                  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Data Siswa</span>
-                </a>
-                  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Data Guru</span>
-                </a>
-                  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Data Pengguna</span>
-                </a>
-            </li>
+            
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Kirim Pesan</span>
-                </a>
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Cetak Laporan</span>
-                </a>
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Settings</span>
-                </a>
-            </li>
+            <!-- <li class="nav-item">
+    <a class="nav-link" href="dashboard.html"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
+        <i class="fas fa-fw fa-chevron-right float-right"></i> </a>
+</li> -->
+
+<hr class="sidebar-divider">
+
+<!-- <div class="sidebar-heading">
+    DATA MASTER
+</div> -->
+
+<!-- <li class="nav-item">
+    <a class="nav-link" href="data_absensi.html"> <i class="fas fa-fw fa-folder"></i>
+        <span>Data Absensi</span>
+        <i class="fas fa-fw fa-chevron-right float-right"></i> </a>
+</li> -->
+<!-- Nav Item - Data Absensi -->
+    {{-- PASTIKAN INI admin.absensi.index --}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('absensi.index') }}">
+            <i class="fas fa-clipboard-list"></i>
+            <span>Data Absensi</span>
+        </a>
+    </li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('siswa.index') }}"> 
+        <i class="fas fa-clipboard-list"></i> 
+        <span>Data Siswa</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('guru.index') }}"> 
+        <i class="fas fa-clipboard-list"></i> 
+        <span>Data Guru</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('kelas.index') }}"> 
+        <i class="fas fa-clipboard-list"></i> 
+        <span>Data Kelas</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('pengguna.index') }}"> 
+        <i class="fas fa-clipboard-list"></i> 
+        <span>Data Pengguna</span>
+    </a>
+</li>
+
+
+
+<!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <!-- <hr class="sidebar-divider"> -->
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
+           
         </ul>
         <!-- End of Sidebar -->

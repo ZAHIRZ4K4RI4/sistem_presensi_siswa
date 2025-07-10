@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; // Jangan lupa import Auth
 use App\Http\Controllers\HomeController; // Import HomeController yang sudah ada
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PenggunaController;
+//use App\Http\Controllers\LaporanController; // Untuk PDF
 
 // Import Controllers untuk Admin
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -12,7 +18,8 @@ use App\Http\Controllers\Admin\MataPelajaranController as AdminMataPelajaranCont
 use App\Http\Controllers\Admin\OrangTuaController as AdminOrangTuaController;
 use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
 use App\Http\Controllers\Admin\JadwalPelajaranController as AdminJadwalPelajaranController;
-use App\Http\Controllers\Admin\PresensiController as AdminPresensiController;
+use App\Http\Controllers\Admin\AbsensiController as AdminAbsensiController;
+
 
 // Import Controllers untuk Guru
 use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
@@ -22,6 +29,8 @@ use App\Http\Controllers\Guru\PresensiController as GuruPresensiController;
 use App\Http\Controllers\TU\DashboardController as TuDashboardController;
 use App\Http\Controllers\TU\PresensiController as TuPresensiController;
 use App\Http\Controllers\TU\LaporanController as TuLaporanController;
+
+
 
 
 /*
@@ -46,6 +55,24 @@ Auth::routes();
 // Rute untuk HomeController. Perhatikan bahwa HomeController sekarang mengarahkan ke admin.app.index
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+
+//Rute untuk membuka fitur menu dashboard
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('admin.absensi.index');
+Route::resource('absensi', AbsensiController::class);
+Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
+Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
+// Rute untuk Cetak Laporan (akan kita bahas di bagian PDF)
+Route::get('/laporan/cetak', function() {
+    return view('laporan.cetak'); // Pastikan Anda memiliki view ini
+})->name('laporan.cetak');
+// Route::get('/laporan/cetak', [LaporanController::class, 'index'])->name('laporan.cetak'); // Jika pakai controller
+
+
+
+
+
 // Rute untuk Admin (membutuhkan autentikasi dan peran 'admin')
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
@@ -55,7 +82,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('orangtua', AdminOrangTuaController::class); // Manajemen Data Orang Tua
     Route::resource('siswa', AdminSiswaController::class); // Manajemen Data Siswa
     Route::resource('jadwal', AdminJadwalPelajaranController::class); // Manajemen Data Jadwal Pelajaran
-    Route::get('/presensi', [AdminPresensiController::class, 'index'])->name('presensi.index'); // Admin bisa melihat semua presensi
+    Route::get('/absensi', [AdminAbsensiController::class, 'index'])->name('absensi.index'); // Admin bisa melihat semua presensi
+    Route::get('/absensi/create', [AdminAbsensiController::class, 'create'])->name('absensi.create');
+    Route::post('/absensi', [AdminAbsensiController::class, 'store'])->name('absensi.store'); // Proses simpan data absensi
+    Route::get('/absensi/{id}/edit', [AdminAbsensiController::class
+, 'edit'])->name('absensi.edit'); // Form edit data absensi
+    Route::put('/absensi/{id}', [AdminAbsensiController::class, 'update'])->name('absensi.update'); // Proses update data absensi
+    Route::delete('/absensi/{id}', [AdminAbsensiController::class, 'destroy'])->name('absensi.destroy'); // Proses hapus data absensi
+    Route::get('/laporan/absensi/pdf', [AdminAbsensiController::class, 'cetakPdf'])->name('laporan.absensi.pdf'); // Rute untuk cetak laporan absensi ke PDF
     // Tambahkan rute manajemen lainnya untuk admin jika diperlukan
 });
 
