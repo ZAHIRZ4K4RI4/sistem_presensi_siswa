@@ -155,21 +155,33 @@
         </div>
 
         <!-- Nav Item - Absensi Siswa -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="Dashboard.html">
                 <i class="fas fa-fw fa-th-large mr-3"></i>
                 <span>Dashboard</span>
             </a>
-        </li>
+        </li> -->
+    <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.absensi.index') }}">
+            <i class="fas fa-fw fa-th-large mr-3"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
 
         <!-- Nav Item - Data Siswa -->
         <!-- Nav Item - Absensi Siswa -->
-    <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
+    <!-- <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.absensi.index') }}">
             <i class="fas fa-fw fa-clipboard-check mr-3"></i>
             <span>Absensi Siswa</span>
         </a>
-    </li>
+    </li> -->
+    <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('admin.absensi.index') }}">
+        <i class="fas fa-fw fa-clipboard-check mr-3"></i>
+        <span>Absensi Siswa</span>
+    </a>
+</li>
     
         <!-- Nav Item - Data Siswa -->
         <li class="nav-item">

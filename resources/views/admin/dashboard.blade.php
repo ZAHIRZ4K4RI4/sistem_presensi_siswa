@@ -10,6 +10,6 @@
     <div class="card">
         <div class="card-body">
             Jumlah Pengguna: {{ $userAll->count() }}
-        </div>
+        </div>  
     </div>
 @endsection

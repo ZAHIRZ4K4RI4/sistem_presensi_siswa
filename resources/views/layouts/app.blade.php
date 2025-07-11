@@ -1,95 +1,80 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Content Wrapper -->
-        <div class="content-wrapper">
-            <!-- Page Heading -->
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6">
-                <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Dashboard</h1>
-                <!-- "Generate Report" button removed as per image -->
-            </div>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            <!-- Dashboard Cards Row (2x2 layout as per image) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 mb-6 main-content">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-                <!-- Card: Jumlah Siswa -->
-                <div class="bg-white rounded-lg card-shadow-custom p-6 h-full flex flex-col justify-between">
-                    <div class="flex items-center mb-4">
-                        <!-- Changed bg-purple-600 to bg-blue-600 -->
-                        <div class="rounded-full flex items-center justify-center w-14 h-14 bg-blue-600 mr-4">
-                            <i class="fas fa-user text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold text-gray-800 mb-1">Jumlah Siswa</div>
-                            <div id="jumlahSiswa" class="text-3xl font-bold text-gray-800"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center text-sm text-gray-600 mt-2">
-                        <i class="fas fa-check-circle text-green-500 mr-1"></i>
-                        <span>Terdaftar</span>
-                    </div>
-                </div>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-                <!-- Card: Jumlah Kelas (already green, no change) -->
-                <div class="bg-white rounded-lg card-shadow-custom p-6 h-full flex flex-col justify-between">
-                    <div class="flex items-center mb-4">
-                        <div class="rounded-full flex items-center justify-center w-14 h-14 bg-green-500 mr-4">
-                            <i class="fas fa-star text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold text-gray-800 mb-1">Jumlah Kelas</div>
-                            <div id="jumlahKelas" class="text-3xl font-bold text-gray-800"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center text-sm text-gray-600 mt-2">
-                        <i class="fas fa-home text-gray-400 mr-1"></i>
-                        <span id="namaSekolah"></span>
-                    </div>
-                </div>
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <!-- Card: Absensi Siswa Hari Ini -->
-                <div class="bg-white rounded-lg card-shadow-custom h-full flex flex-col">
-                    <!-- Changed bg-purple-600 to bg-blue-600 -->
-                    <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-                        <h6 class="text-lg font-bold mb-1">Absensi Siswa Hari Ini</h6>
-                        <div id="tanggalHariIniSiswa" class="text-sm"></div>
-                    </div>
-                    <div class="p-6 flex-grow">
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-                            <div>
-                                <div class="text-green-500 text-sm font-bold">Hadir</div>
-                                <div id="hadirSiswa" class="text-xl font-bold text-gray-800"></div>
-                            </div>
-                            <div>
-                                <div class="text-yellow-500 text-sm font-bold">Sakit</div>
-                                <div id="sakitSiswa" class="text-xl font-bold text-gray-800"></div>
-                            </div>
-                            <div>
-                                <div class="text-blue-500 text-sm font-bold">Izin</div>
-                                <div id="izinSiswa" class="text-xl font-bold text-gray-800"></div>
-                            </div>
-                            <div>
-                                <div class="text-red-500 text-sm font-bold">Alfa</div>
-                                <div id="alfaSiswa" class="text-xl font-bold text-gray-800"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
 
-                <!-- Card: Tingkat Kehadiran Siswa (with static graph image in header) -->
-                <div class="bg-white rounded-lg card-shadow-custom h-full flex flex-col">
-                    <!-- Changed bg-purple-600 to bg-blue-600 -->
-                    <div class="bg-blue-600 p-4 rounded-t-lg flex items-center justify-center overflow-hidden" style="min-height: 150px; max-height: 150px;">
-                        <!-- Placeholder image for the graph, changed background to blue -->
-                        <img src="https://placehold.co/400x150/4e73df/FFFFFF?text=GRAPH" alt="Graph Placeholder" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex-grow">
-                        <h4 class="text-lg font-bold text-gray-800 mb-1">Tingkat Kehadiran Siswa</h4>
-                        <p class="text-sm text-gray-600 mb-4">Jumlah kehadiran siswa 7 hari terakhir</p>
-                        <div class="flex items-center text-sm">
-                            <!-- Changed text-purple-600 to text-blue-600 -->
-                            <i class="fas fa-eye text-blue-600 mr-2"></i>
-                            <a href="#" class="text-blue-600 hover:underline">Lihat data</a>
-                        </div>
-                    </div>
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
                 </div>
             </div>
-            <!-- End Dashboard Cards Row -->
+        </nav>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>
+</body>
+</html>
