@@ -83,7 +83,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Update Data</button>
-                    <a href="{{ route('admin.absensi.index') }}" class="btn btn-secondary">Batal</a>
+                    <a href="{{ route('absensi.index') }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Batal</a>
                 </form>
             </div>
         </div>

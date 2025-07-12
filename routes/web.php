@@ -61,6 +61,9 @@ Auth::routes();
 Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
 Route::resource('absensi', AbsensiController::class);
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
+Route::put('/absensi/{absensi}', [AbsensiController::class, 'update'])->name('absensi.update');
+// Atau bisa juga menggunakan Route::patch()
+// Route::patch('/absensi/{absensi}', [AbsensiController::class, 'update'])->name('absensi.update');
 
 Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
 Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');

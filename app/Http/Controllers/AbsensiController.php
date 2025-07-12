@@ -21,7 +21,6 @@ class AbsensiController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * Ini adalah metode yang hilang atau salah, yang menyebabkan error.
      */
     public function create()
     {
@@ -61,5 +60,57 @@ class AbsensiController extends Controller
                          ->with('success', 'Data absensi berhasil ditambahkan!');
     }
 
-    // ... metode show, edit, update, destroy ...
+    /**
+     * Display the specified resource.
+     * Menampilkan detail satu data absensi.
+     */
+    public function show(Absensi $absensi)
+    {
+        return view('admin.absensi.show', compact('absensi'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * Menampilkan formulir untuk mengedit data absensi yang sudah ada.
+     */
+    public function edit(Absensi $absensi)
+    {
+        return view('admin.absensi.edit', compact('absensi'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * Memperbarui data absensi yang sudah ada di database.
+     */
+    public function update(Request $request, Absensi $absensi)
+    {
+        $validatedData = $request->validate([
+            'nisn' => 'required|string|max:255',
+            'nama_siswa' => 'required|string|max:255',
+            'kelas' => 'required|string|max:255',
+            'paralel' => 'required|string|max:255',
+            'kehadiran' => 'required|string|in:Hadir,Sakit,Izin,Alpha',
+            // Jika jam_masuk dan jam_pulang bisa diedit manual, tambahkan validasinya di sini
+            // 'jam_masuk' => 'required|date_format:H:i',
+            // 'jam_pulang' => 'nullable|date_format:H:i',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        $absensi->update($validatedData);
+
+        return redirect()->route('absensi.index')
+                         ->with('success', 'Data absensi berhasil diperbarui!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * Menghapus data absensi dari database.
+     */
+    public function destroy(Absensi $absensi)
+    {
+        $absensi->delete();
+
+        return redirect()->route('kehadiran.index')
+                         ->with('success', 'Data absensi berhasil dihapus!');
+    }
 }

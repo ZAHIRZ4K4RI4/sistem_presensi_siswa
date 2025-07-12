@@ -62,57 +62,57 @@
                     <table class="table min-w-full leading-normal border-collapse text-sm" id="dataTable" width="100%" cellspacing="0"> {{-- Menambahkan text-sm untuk ukuran font tabel --}}
                         <thead>
                             <tr>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tl-lg"> {{-- Mengurangi padding px-3 py-2 --}}
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tl-lg">
                                     No
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Nisn
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Nama Siswa
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Kelas
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Paralel
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Kehadiran
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Jam Masuk
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Jam Pulang
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Keterangan
                                 </th>
-                                <th class="px-3 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tr-lg">
+                                <th class="px-2 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tr-lg">
                                     Aksi
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($siswa as $key => $data)
-                                <tr>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm"> {{-- Mengurangi padding px-3 py-2 --}}
+                                <tr class="odd:bg-white even:bg-gray-50 hover:bg-gray-100"> {{-- Menambahkan warna selang-seling dan efek hover --}}
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm"> {{-- Menghapus bg-white dari td --}}
                                         {{ $key + 1 }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         {{ $data['nisn'] ?? '-' }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         {{ $data['nama_siswa'] ?? '-' }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         {{ $data['kelas'] ?? '-' }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         {{ $data['paralel'] ?? '-' }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         @php
                                             $kehadiranClass = '';
                                             switch($data['kehadiran'] ?? '') {
@@ -123,31 +123,31 @@
                                                 default: $kehadiranClass = 'bg-gray-400'; break;
                                             }
                                         @endphp
-                                        <span class="inline-block px-2 py-1 text-white text-xs font-semibold rounded-full {{ $kehadiranClass }}"> {{-- Mengurangi padding px-2 py-1 --}}
+                                        <span class="inline-block px-2 py-1 text-white text-xs font-semibold rounded-full {{ $kehadiranClass }}">
                                             {{ $data['kehadiran'] ?? '-' }}
                                         </span>
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         {{ $data['jam_masuk'] ?? '-' }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         {{ $data['jam_pulang'] ?? '-' }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm">
                                         {{ $data['keterangan'] ?? '-' }}
                                     </td>
-                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm whitespace-nowrap">
-                                        <a href="#" class="inline-flex items-center px-2 py-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-md shadow-sm mr-2"> {{-- Mengubah warna Edit menjadi ungu --}}
-                                            <i class="fas fa-edit mr-1"></i> Edit
+                                    <td class="px-2 py-1 border-b border-gray-200 text-sm whitespace-nowrap">
+                                        <a href="{{ route('absensi.edit', $data['id']) }}" class="inline-flex items-center px-2 py-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-md shadow-sm mr-2">
+                                            <i class="fas fa-edit mr-1"></i> Edit   
                                         </a>
-                                        <a href="#" class="inline-flex items-center px-2 py-1 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-md shadow-sm"> {{-- Mengubah warna Delete menjadi merah --}}
+                                        <a href="#" class="inline-flex items-center px-2 py-1 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-md shadow-sm">
                                             <i class="fas fa-trash-alt mr-1"></i> Hapus
                                         </a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="10" class="px-3 py-2 border-b border-gray-200 bg-white text-sm text-center text-gray-500">
+                                    <td colspan="10" class="px-2 py-1 border-b border-gray-200 bg-white text-sm text-center text-gray-500">
                                         Tidak ada data siswa.
                                     </td>
                                 </tr>
