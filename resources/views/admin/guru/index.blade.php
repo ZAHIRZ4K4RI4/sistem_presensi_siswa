@@ -1,5 +1,3 @@
-{{-- resources/views/guru/index.blade.php --}}
-
 @extends('layouts.app') {{-- Pastikan ini sesuai dengan master layout Anda --}}
 
 @section('content') {{-- Ini adalah section di mana konten utama Anda akan diletakkan --}}
@@ -57,4 +55,15 @@
             </div>
         </div>
     </div>
+    {{-- Tombol Cetak Laporan dan Tambah Data --}}
+                <div class="flex items-center space-x-3">
+                    <button onclick="window.print()" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-md shadow-md">
+                        Cetak Laporan
+                    </button>
+                    <a href="{{ route('absensi.create') }}" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-md shadow-md flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Tambah Data</span>
+                    </a>
+                </div>
+            </div>
 @endsection

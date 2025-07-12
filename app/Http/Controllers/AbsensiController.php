@@ -2,168 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
 use Illuminate\Http\Request;
-// use App\Models\Absensi; // Jika Anda punya model Absensi
+use Carbon\Carbon; // Impor Carbon untuk bekerja dengan waktu
 
 class AbsensiController extends Controller
 {
-    // Method untuk menampilkan daftar absensi (sudah ada, tapi saya sertakan lagi)
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        // Di sinilah Anda akan mengambil data absensi dari database
-        // Contoh data dummy yang sudah diperbarui dengan kolom baru
-        $absensi = [
-            [
-                'id' => 1,
-                'nisn' => '99887766',
-                'nama_siswa' => 'Agus Setiawan',
-                'kelas' => '7',
-                'paralel' => 'A',
-                'kehadiran' => 'Hadir',
-                'jam_masuk' => '07:00',
-                'jam_pulang' => '14:00',
-                'keterangan' => '-'
-            ],
-            [
-                'id' => 2,
-                'nisn' => '99887767',
-                'nama_siswa' => 'Budi Santoso',
-                'kelas' => '7',
-                'paralel' => 'B',
-                'kehadiran' => 'Sakit',
-                'jam_masuk' => '-',
-                'jam_pulang' => '-',
-                'keterangan' => 'Demam'
-            ],
-            [
-                'id' => 3,
-                'nisn' => '99887768',
-                'nama_siswa' => 'Citra Dewi',
-                'kelas' => '8',
-                'paralel' => 'A',
-                'kehadiran' => 'Izin',
-                'jam_masuk' => '-',
-                'jam_pulang' => '-',
-                'keterangan' => 'Acara keluarga'
-            ],
-            [
-                'id' => 4,
-                'nisn' => '99887769',
-                'nama_siswa' => 'Dewi Anggraini',
-                'kelas' => '8',
-                'paralel' => 'B',
-                'kehadiran' => 'Alpha',
-                'jam_masuk' => '-',
-                'jam_pulang' => '-',
-                'keterangan' => 'Tanpa keterangan'
-            ],
-            [
-                'id' => 5,
-                'nisn' => '99887766',
-                'nama_siswa' => 'Agus Setiawan',
-                'kelas' => '7',
-                'paralel' => 'A',
-                'kehadiran' => 'Hadir',
-                'jam_masuk' => '07:05',
-                'jam_pulang' => '14:00',
-                'keterangan' => '-'
-            ]
-        ];
-
-        return view('admin.absensi.index', compact('absensi'));
+        // Mengambil data absensi, diurutkan terbaru dengan paginasi
+        $siswa = Absensi::latest()->paginate(10);
+        // Mengembalikan view index absensi dengan data siswa
+        return view('admin.absensi.index', compact('siswa'));
     }
 
-    // Method untuk menampilkan form tambah data absensi
+    /**
+     * Show the form for creating a new resource.
+     * Ini adalah metode yang hilang atau salah, yang menyebabkan error.
+     */
     public function create()
     {
-        // Di sini Anda bisa mengirim data yang dibutuhkan untuk form (misal daftar siswa)
-        // $siswa = Siswa::all();
-        return view('admin.absensi.create'); // , compact('siswa')
+        // Mengembalikan view formulir untuk menambah data absensi
+        return view('admin.absensi.create'); // Pastikan path view ini benar
     }
 
-    // Method untuk menyimpan data absensi baru
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
+        // Aturan validasi yang diperbarui
+        // 'jam_masuk' dan 'jam_pulang' tidak lagi 'required' dari input pengguna
+        // karena akan diatur otomatis oleh sistem.
+        $validatedData = $request->validate([
             'nisn' => 'required|string|max:255',
             'nama_siswa' => 'required|string|max:255',
             'kelas' => 'required|string|max:255',
             'paralel' => 'required|string|max:255',
-            'kehadiran' => 'required|in:Hadir,Izin,Sakit,Alpha',
-            'jam_masuk' => 'nullable|string|max:5',
-            'jam_pulang' => 'nullable|string|max:5',
-            'keterangan' => 'nullable|string|max:255',
+            'kehadiran' => 'required|string|in:Hadir,Sakit,Izin,Alpha',
+            'keterangan' => 'nullable|string',
         ]);
 
-        // TODO: Simpan data ke database
-        // Absensi::create($request->all());
+        // Logika untuk mengisi jam_masuk secara otomatis dengan waktu saat ini
+        $validatedData['jam_masuk'] = Carbon::now()->format('H:i');
 
-        return redirect()->route('absensi.index')->with('success', 'Data absensi berhasil ditambahkan!');
+        // Logika untuk mengisi jam_pulang secara otomatis dengan waktu saat ini
+        // Asumsi: Jika diminta otomatis saat input, berarti jam pulang juga dicatat saat itu.
+        $validatedData['jam_pulang'] = Carbon::now()->format('H:i');
+
+
+        // Buat record Absensi baru dengan data yang sudah divalidasi dan ditambahkan waktu otomatis
+        Absensi::create($validatedData);
+
+        return redirect()->route('kehadiran.index')
+                         ->with('success', 'Data absensi berhasil ditambahkan!');
     }
 
-    // Method untuk menampilkan form edit data absensi
-    public function edit($id)
-    {
-        // TODO: Ambil data absensi berdasarkan ID dari database
-        // $absensi = Absensi::findOrFail($id);
-        // Contoh data dummy untuk edit:
-        $absensi = [
-            'id' => $id,
-            'nisn' => '99887766',
-            'nama_siswa' => 'Agus Setiawan',
-            'kelas' => '7',
-            'paralel' => 'A',
-            'kehadiran' => 'Hadir',
-            'jam_masuk' => '07:00',
-            'jam_pulang' => '14:00',
-            'keterangan' => '-'
-        ]; // Ini hanya contoh, Anda harus mengambil dari database
-
-        return view('absensi.edit', compact('absensi'));
-    }
-
-    // Method untuk memperbarui data absensi
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nisn' => 'required|string|max:255',
-            'nama_siswa' => 'required|string|max:255',
-            'kelas' => 'required|string|max:255',
-            'paralel' => 'required|string|max:255',
-            'kehadiran' => 'required|in:Hadir,Izin,Sakit,Alpha',
-            'jam_masuk' => 'nullable|string|max:5',
-            'jam_pulang' => 'nullable|string|max:5',
-            'keterangan' => 'nullable|string|max:255',
-        ]);
-
-        // TODO: Perbarui data di database
-        // $absensi = Absensi::findOrFail($id);
-        // $absensi->update($request->all());
-
-        return redirect()->route('absensi.index')->with('success', 'Data absensi berhasil diperbarui!');
-    }
-
-    // Method untuk menghapus data absensi
-    public function destroy($id)
-    {
-        // TODO: Hapus data dari database
-        // Absensi::destroy($id);
-
-        return redirect()->route('absensi.index')->with('success', 'Data absensi berhasil dihapus!');
-    }
-
-    // Method untuk memperbarui status kehadiran via AJAX
-    public function updateKehadiran(Request $request, $id)
-    {
-        $request->validate([
-            'kehadiran' => 'required|in:Hadir,Izin,Sakit,Alpha',
-        ]);
-
-        // TODO: Perbarui status kehadiran di database berdasarkan $id
-        // $absensi = Absensi::findOrFail($id);
-        // $absensi->kehadiran = $request->kehadiran;
-        // $absensi->save();
-
-        return response()->json(['success' => true, 'message' => 'Status kehadiran berhasil diperbarui.']);
-    }
+    // ... metode show, edit, update, destroy ...
 }

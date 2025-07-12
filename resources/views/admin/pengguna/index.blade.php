@@ -1,5 +1,3 @@
-{{-- resources/views/pengguna/index.blade.php --}}
-
 @extends('layouts.app') {{-- Pastikan ini sesuai dengan master layout Anda --}}
 
 @section('content') {{-- Ini adalah section di mana konten utama Anda akan diletakkan --}}

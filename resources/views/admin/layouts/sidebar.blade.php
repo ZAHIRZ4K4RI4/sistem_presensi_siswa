@@ -162,7 +162,7 @@
             </a>
         </li> -->
     <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.absensi.index') }}">
+        <a class="nav-link" href="{{ route('home') }}">
             <i class="fas fa-fw fa-th-large mr-3"></i>
             <span>Dashboard</span>
         </a>
@@ -170,50 +170,43 @@
 
         <!-- Nav Item - Data Siswa -->
         <!-- Nav Item - Absensi Siswa -->
-    <!-- <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.absensi.index') }}">
+
+    <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('absensi.index') }}">
             <i class="fas fa-fw fa-clipboard-check mr-3"></i>
             <span>Absensi Siswa</span>
         </a>
-    </li> -->
-    <li class="nav-item {{ Request::is('admin/absensi*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('admin.absensi.index') }}">
-        <i class="fas fa-fw fa-clipboard-check mr-3"></i>
-        <span>Absensi Siswa</span>
-    </a>
-</li>
-    
-        <!-- Nav Item - Data Siswa -->
-        <li class="nav-item">
-            <a class="nav-link" href="data-siswa.html">
-                <i class="fas fa-fw fa-user-graduate mr-3"></i>
-                <span>Data Siswa</span>
-            </a>
-        </li>
+    </li>
+
+    <li class="nav-item {{ Request::is('admin/siswa*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('siswa.index') }}">
+            <i class="fas fa-fw fa-user-graduate mr-3"></i>
+            <span>Data Siswa</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{ Request::is('admin/guru*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('guru.index') }}">
+            <i class="fas fa-fw fa-chalkboard-teacher mr-3"></i>
+            <span>Data Guru</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{ Request::is('admin/kelas*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('kelas.index') }}">
+            <i class="fas fa-fw fa-school mr-3"></i>
+            <span>Data Kelas</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{ Request::is('admin/pengguna*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pengguna.index') }}">
+            <i class="fas fa-fw fa-users mr-3"></i>
+            <span>Data Pengguna</span>
+        </a>
+    </li>
         
-        <!-- Nav Item - Data Guru -->
-        <li class="nav-item">
-            <a class="nav-link" href="data-guru.html">
-                <i class="fas fa-fw fa-chalkboard-teacher mr-3"></i>
-                <span>Data Guru</span>
-            </a>
-        </li>
         
-        <!-- Nav Item - Data Kelas -->
-        <li class="nav-item">
-            <a class="nav-link" href="data-kelas.html">
-                <i class="fas fa-fw fa-school mr-3"></i>
-                <span>Data Kelas</span>
-            </a>
-        </li>
-        
-        <!-- Nav Item - Data Pengguna -->
-        <li class="nav-item">
-            <a class="nav-link" href="data-pengguna.html">
-                <i class="fas fa-fw fa-users mr-3"></i>
-                <span>Data Pengguna</span>
-            </a>
-        </li>
 
         <!-- Nav Item - Cetak Laporan -->
         <li class="nav-item">
