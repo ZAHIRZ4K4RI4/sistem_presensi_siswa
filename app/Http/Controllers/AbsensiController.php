@@ -13,10 +13,10 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        // Mengambil data absensi, diurutkan terbaru dengan paginasi
-        $siswa = Absensi::latest()->paginate(10);
-        // Mengembalikan view index absensi dengan data siswa
-        return view('admin.absensi.index', compact('siswa'));
+        // // Mengambil data absensi, diurutkan terbaru dengan paginasi
+        // $siswa = Absensi::latest()->paginate(10);
+        // // Mengembalikan view index absensi dengan data siswa
+        return view('admin.absensi.index');
     }
 
     /**
