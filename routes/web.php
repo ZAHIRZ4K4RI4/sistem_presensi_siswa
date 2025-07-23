@@ -50,6 +50,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
+});
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::resource('guru', GuruController::class);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
